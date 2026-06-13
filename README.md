@@ -237,6 +237,17 @@ photonic-memory time_b: 15, 60, 400 s
 
 The file `data/results/experiment_results.csv` contains trajectory-prediction metrics for the evaluated experimental conditions. Each row corresponds to one sensor configuration, including discretization scenario, sensor type (`normal` or `neuro`), number of input frames, photonic-memory speed where applicable, and the resulting ATE and RMSE values.
 
+## Sample data
+
+The directory `data/sample/conventional/` contains two representative generated conventional-sensor frames:
+
+```text
+542_87_249.png
+639_70_218.png
+```
+
+These files are included to illustrate the image format and filename convention used in the trajectory-prediction datasets. The complete generated image-frame datasets are not stored in this repository because they are produced directly by the released data-generation scripts from the provided configuration files and calibration data.
+
 ## Data storage note
 
 The full generated image datasets are not stored in this repository because they are deterministic intermediate outputs and can be regenerated from the released scripts, configuration files, random seeds, and calibration data.
