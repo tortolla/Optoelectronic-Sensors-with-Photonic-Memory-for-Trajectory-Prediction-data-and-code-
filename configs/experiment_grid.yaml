@@ -1,0 +1,51 @@
+image:
+  size: 600
+  object: white_circle
+  background: black
+  pixels_per_frame: 1
+  trajectory_switch_steps: [5, 40]
+
+trajectory:
+  type: piecewise_linear
+  equation: "y = kx + b"
+  slopes: [1.0, 2.0, -1.0, 0.5, 3.0]
+  intercepts: [0.0, 1.0, 0.0, -2.0, 5.0]
+
+dataset:
+  num_frames: 100000
+  prediction_horizon: 3
+
+sensors:
+  conventional:
+    source_folder: kill_bill
+  photonic_memory:
+    source_folder: kill_bill
+    time_b_seconds: [15, 60, 400]
+
+discretization:
+  values: [5, 20]
+
+noise:
+  regimes:
+    - name: no_noise
+      mean: 0
+      std: 0
+    - name: gaussian_50_10
+      mean: 50
+      std: 10
+    - name: gaussian_80_20
+      mean: 80
+      std: 20
+
+model:
+  architecture: CNN_LSTM
+  input_frames: [1, 2, 3, 4, 5, 6]
+  prediction_horizon: 3
+  optimizer: AdamW
+  loss: MSE
+  hpo:
+    method: Optuna
+    trials_per_condition: 100
+  metrics:
+    - ATE
+    - RMSE
